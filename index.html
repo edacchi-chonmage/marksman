@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="jsi-markdown">
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    $(function () {
+      socket.on('hoge', function (msg) {
+        $('#jsi-markdown').html(msg);
+        $('input[type=checkbox]:checked').closest('p,li').css('textDecoration', 'line-through');
+        $('input[type=checkbox]').on('change', function () {
+          if ($(this).is(':checked')) {
+            $(this).closest('p,li').css('textDecoration', 'line-through');
+          } else {
+            $(this).closest('p,li').css('textDecoration', 'none');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
